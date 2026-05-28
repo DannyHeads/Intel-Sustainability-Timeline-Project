@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intel Sustainability Timeline</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #ffffff;
+      color: #222;
+    }
+
+    .page {
+      width: 90%;
+      max-width: 1250px;
+      margin: 35px auto;
+      background: #f3f7fa;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, #00a3e0, #0068b5, #003c71);
+      color: white;
+      text-align: center;
+      padding: 48px 20px 58px;
+      overflow: hidden;
+    }
+
+    .hero::before,
+    .hero::after {
+      content: "";
+      position: absolute;
+      border: 2px solid rgba(255, 255, 255, 0.16);
+      border-radius: 18px;
+      animation: floatChip 8s infinite ease-in-out;
+    }
+
+    .hero::before {
+      width: 120px;
+      height: 120px;
+      top: 35px;
+      left: 80px;
+    }
+
+    .hero::after {
+      width: 160px;
+      height: 160px;
+      bottom: -45px;
+      right: 90px;
+      animation-delay: 2s;
+    }
+
+    @keyframes floatChip {
+      0%, 100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(8deg);
+      }
+    }
+
+    .intel-logo {
+      font-size: 34px;
+      font-weight: bold;
+      margin-bottom: 18px;
+      letter-spacing: -1px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 44px;
+      line-height: 1.15;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .accent-line {
+      width: 50px;
+      height: 4px;
+      background: #00e5ff;
+      margin: 0 auto 20px;
+      border-radius: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badges {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 2;
+    }
+
+    .badge {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .timeline-section {
+      padding: 45px 45px 50px;
+      text-align: center;
+    }
+
+    .timeline-title {
+      color: #003c71;
+      font-size: 26px;
+      margin-bottom: 10px;
+    }
+
+    .timeline-subtitle {
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 35px;
+    }
+
+    .timeline-wrapper {
+      position: relative;
+      max-width: 1000px;
+      margin: 0 auto 30px;
+    }
+
+    .timeline-line {
+      position: absolute;
+      top: 34px;
+      left: 8%;
+      right: 8%;
+      height: 4px;
+      background: #c7d9e7;
+      border-radius: 20px;
+      z-index: 0;
+    }
+
+    .timeline-progress {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, #0071c5, #00e5ff);
+      border-radius: 20px;
+      transition: width 0.35s ease;
+    }
+
+    .timeline {
+      display: flex;
+      gap: 22px;
+      justify-content: center;
+      align-items: stretch;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      width: 210px;
+      min-height: 245px;
+      background: white;
+      box-shadow: 0 5px 14px rgba(0, 0, 0, 0.13);
+      text-align: left;
+      padding: 16px;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      position: relative;
+      overflow: hidden;
+      border-radius: 6px;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: rgba(0, 229, 255, 0.12);
+      border-radius: 50%;
+      top: -30px;
+      right: -30px;
+      transition: transform 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 25px rgba(0, 113, 197, 0.28);
+    }
+
+    .card:hover::before {
+      transform: scale(1.6);
+    }
+
+    .card.active {
+      background: linear-gradient(145deg, #0054a6, #003c71);
+      color: white;
+      transform: translateY(-10px);
+    }
+
+    .year-dot {
+      width: 18px;
+      height: 18px;
+      background: #0071c5;
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px #c7d9e7;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card.active .year-dot {
+      background: #00e5ff;
+      box-shadow: 0 0 0 3px #00e5ff, 0 0 18px #00e5ff;
+    }
+
+    .year {
+      color: #0a3f91;
+      font-size: 21px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card.active .year {
+      color: white;
+    }
+
+    .card h3 {
+      font-size: 15px;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-box {
+      width: 100%;
+      height: 90px;
+      background-size: cover;
+      background-position: center;
+      margin-top: 8px;
+      border-radius: 4px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .image-1968 {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80");
+    }
+
+    .image-1971 {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80");
+    }
+
+    .image-1978 {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
+        url("https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=600&q=80");
+    }
+
+    .image-2020 {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
+        url("https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=600&q=80");
+    }
+
+    .image-2030 {
+      background-image:
+        linear-gradient(rgba(0,0,0,0.10), rgba(0,0,0,0.10)),
+        url("https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=600&q=80");
+    }
+
+    .card-info {
+      display: none;
+      font-size: 13px;
+      line-height: 1.45;
+      margin-top: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card.active .image-box {
+      opacity: 0.22;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      border-radius: 0;
+      z-index: 0;
+    }
+
+    .card.active .card-info {
+      display: block;
+    }
+
+    .info-panel {
+      max-width: 800px;
+      margin: 35px auto 0;
+      background: white;
+      padding: 26px;
+      box-shadow: 0 7px 20px rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      border-left: 7px solid #0071c5;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .info-panel::after {
+      content: "∞";
+      position: absolute;
+      right: 24px;
+      bottom: -18px;
+      font-size: 90px;
+      color: rgba(0, 113, 197, 0.08);
+      font-weight: bold;
+    }
+
+    .info-panel h2 {
+      color: #0054a6;
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .info-panel p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: #333;
+      max-width: 650px;
+    }
+
+    .impact-row {
+      display: flex;
+      gap: 14px;
+      margin-top: 22px;
+      flex-wrap: wrap;
+    }
+
+    .impact-box {
+      flex: 1;
+      min-width: 150px;
+      background: #eef7fc;
+      padding: 15px;
+      border-radius: 6px;
+      border-top: 4px solid #00a3e0;
+    }
+
+    .impact-box strong {
+      display: block;
+      color: #003c71;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .impact-box span {
+      font-size: 13px;
+      color: #444;
+    }
+
+    .button-row {
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    button {
+      background: linear-gradient(135deg, #0071c5, #00a3e0);
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 999px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 18px rgba(0, 113, 197, 0.35);
+    }
+
+    .instructions {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #444;
+    }
+
+    @media (max-width: 850px) {
+      .hero h1 {
+        font-size: 32px;
+      }
+
+      .timeline-section {
+        padding: 35px 20px;
+      }
+
+      .timeline-line {
+        display: none;
+      }
+
+      .card {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .impact-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="page">
+
+    <section class="hero">
+      <div class="intel-logo">intel.</div>
+
+      <h1>
+        Sustainability<br />
+        Through the Ages
+      </h1>
+
+      <div class="accent-line"></div>
+
+      <p>
+        Explore how Intel’s technology evolved from early processors to smarter,
+        more efficient computing designed to support people, progress, and the planet.
+      </p>
+
+      <div class="hero-badges">
+        <div class="badge">Cleaner Technology</div>
+        <div class="badge">Smarter Chips</div>
+        <div class="badge">Responsible Innovation</div>
+      </div>
+    </section>
+
+    <section class="timeline-section">
+
+      <h2 class="timeline-title">Innovation Timeline</h2>
+      <p class="timeline-subtitle">
+        Click or hover over each milestone to reveal its impact.
+      </p>
+
+      <div class="timeline-wrapper">
+        <div class="timeline-line">
+          <div class="timeline-progress" id="timeline-progress"></div>
+        </div>
+
+        <div class="timeline">
+
+          <div class="card active">
+            <div class="year-dot"></div>
+            <div class="year">1968</div>
+            <h3>Intel Founded</h3>
+            <div class="image-box image-1968"></div>
+            <p class="card-info">
+              Intel begins its journey in semiconductor innovation, building the foundation for modern computing.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="year-dot"></div>
+            <div class="year">1971</div>
+            <h3>First Microprocessor</h3>
+            <div class="image-box image-1971"></div>
+            <p class="card-info">
+              The Intel 4004 helped shrink computing power into a single chip, making devices smaller and smarter.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="year-dot"></div>
+            <div class="year">1978</div>
+            <h3>8086 Processor</h3>
+            <div class="image-box image-1978"></div>
+            <p class="card-info">
+              The 8086 processor helped launch the x86 architecture, shaping decades of personal computing.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="year-dot"></div>
+            <div class="year">2020</div>
+            <h3>Energy Efficiency</h3>
+            <div class="image-box image-2020"></div>
+            <p class="card-info">
+              Intel continues improving performance while focusing on more efficient technology and reduced waste.
+            </p>
+          </div>
+
+          <div class="card">
+            <div class="year-dot"></div>
+            <div class="year">2030</div>
+            <h3>Future Goals</h3>
+            <div class="image-box image-2030"></div>
+            <p class="card-info">
+              Intel looks ahead toward responsible manufacturing, lower emissions, and sustainable innovation.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <p class="instructions">
+        Scroll to view timeline | Hover or click cards to learn more
+      </p>
+
+      <div class="info-panel">
+        <h2 id="panel-title">1968 — Intel Founded</h2>
+
+        <p id="panel-text">
+          Intel’s story began with semiconductor innovation. Over time, the company’s work helped make computing smaller,
+          faster, and more accessible, setting the stage for future advances in sustainable technology.
+        </p>
+
+        <div class="impact-row">
+          <div class="impact-box">
+            <strong id="impact-one">Foundation</strong>
+            <span>Built the base for modern processor innovation.</span>
+          </div>
+
+          <div class="impact-box">
+            <strong id="impact-two">Progress</strong>
+            <span>Helped computing become more powerful and compact.</span>
+          </div>
+
+          <div class="impact-box">
+            <strong id="impact-three">Future</strong>
+            <span>Opened the door for smarter, greener technology.</span>
+          </div>
+        </div>
+
+        <div class="button-row">
+          <button onclick="nextCard()">Next Milestone</button>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".card");
+    const progressBar = document.getElementById("timeline-progress");
+
+    const milestoneInfo = [
+      {
+        year: "1968",
+        title: "Intel Founded",
+        text: "Intel’s story began with semiconductor innovation. Over time, the company’s work helped make computing smaller, faster, and more accessible, setting the stage for future advances in sustainable technology.",
+        impactOne: "Foundation",
+        impactTwo: "Progress",
+        impactThree: "Future"
+      },
+      {
+        year: "1971",
+        title: "First Microprocessor",
+        text: "The Intel 4004 changed computing by placing processing power into a small chip. This helped begin the movement toward smaller devices that could do more while using fewer physical resources.",
+        impactOne: "Smaller",
+        impactTwo: "Smarter",
+        impactThree: "Efficient"
+      },
+      {
+        year: "1978",
+        title: "8086 Processor",
+        text: "The 8086 processor became a major step in personal computing. Its architecture influenced generations of computers, supporting the growth of digital tools used in homes, schools, and businesses.",
+        impactOne: "x86",
+        impactTwo: "Personal PCs",
+        impactThree: "Expansion"
+      },
+      {
+        year: "2020",
+        title: "Energy Efficiency",
+        text: "As computing needs grew, Intel continued focusing on better performance and improved efficiency. More efficient processors help reduce unnecessary power use while supporting modern technology needs.",
+        impactOne: "Performance",
+        impactTwo: "Efficiency",
+        impactThree: "Less Waste"
+      },
+      {
+        year: "2030",
+        title: "Future Goals",
+        text: "Looking forward, Intel’s sustainability goals focus on responsible manufacturing, reduced emissions, improved energy use, and technology that supports a cleaner digital future.",
+        impactOne: "Cleaner",
+        impactTwo: "Responsible",
+        impactThree: "Sustainable"
+      }
+    ];
+
+    let currentIndex = 0;
+
+    cards.forEach((card, index) => {
+      card.addEventListener("mouseenter", () => {
+        setActiveCard(index);
+      });
+
+      card.addEventListener("click", () => {
+        setActiveCard(index);
+      });
+    });
+
+    function setActiveCard(index) {
+      cards.forEach(card => {
+        card.classList.remove("active");
+      });
+
+      cards[index].classList.add("active");
+
+      document.getElementById("panel-title").textContent =
+        milestoneInfo[index].year + " — " + milestoneInfo[index].title;
+
+      document.getElementById("panel-text").textContent =
+        milestoneInfo[index].text;
+
+      document.getElementById("impact-one").textContent =
+        milestoneInfo[index].impactOne;
+
+      document.getElementById("impact-two").textContent =
+        milestoneInfo[index].impactTwo;
+
+      document.getElementById("impact-three").textContent =
+        milestoneInfo[index].impactThree;
+
+      progressBar.style.width = ((index + 1) / cards.length) * 100 + "%";
+
+      currentIndex = index;
+    }
+
+    function nextCard() {
+      currentIndex++;
+
+      if (currentIndex >= cards.length) {
+        currentIndex = 0;
+      }
+
+      setActiveCard(currentIndex);
+    }
+  </script>
+
+</body>
+</html>
