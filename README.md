@@ -1,1 +1,3 @@
 # Intel-Sustainability-Timeline-Project
+
+Intel Sustainability Through the Ages is an interactive timeline webpage built with HTML, CSS, and JavaScript. The project highlights key moments in Intel’s history, from its founding to future sustainability goals, while using a clean Intel-inspired blue design. It includes hoverable and clickable timeline cards, a dynamic information panel, animated visual effects, a progress bar, and a responsive Flexbox layout. Development was aided by GPT prompts, which helped guide the design, structure, styling, and JavaScript interactivity. The goal of the project was to practice front-end development by combining structure, styling, and basic interactivity into a polished single-page web experience.
